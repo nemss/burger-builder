@@ -10,7 +10,7 @@ export default class ContactData extends Component {
 	state = {
 		orderForm: {
 			name: {
-				elementType: 'name',
+				elementType: 'input',
 				elementConfig: {
 					type: 'text',
 					placeholder: 'Your Name'
@@ -26,7 +26,7 @@ export default class ContactData extends Component {
 				value: ''
 			},
 			zipCode: {
-				elementType: 'name',
+				elementType: 'input',
 				elementConfig: {
 					type: 'text',
 					placeholder: 'ZIP Code'
@@ -34,7 +34,7 @@ export default class ContactData extends Component {
 				value: ''
 			},
 			country: {
-				elementType: 'name',
+				elementType: 'input',
 				elementConfig: {
 					type: 'text',
 					placeholder: 'Country'
@@ -42,7 +42,7 @@ export default class ContactData extends Component {
 				value: ''
 			},
 			email: {
-				elementType: 'name',
+				elementType: 'input',
 				elementConfig: {
 					type: 'email',
 					placeholder: 'Your E-Mail'
@@ -75,6 +75,18 @@ export default class ContactData extends Component {
 			.catch(error => this.setState({loading: false}));
 	};
 
+	inputChangeHandler = (event, inputIdentifier) => {
+		const updatedOrderForm = {
+			...this.state.orderForm
+		};
+		const updateFormElement = {
+			...updatedOrderForm[inputIdentifier]
+		};
+		updateFormElement.value = event.target.value;
+		updatedOrderForm[inputIdentifier] = updateFormElement;
+		this.setState({orderForm: updatedOrderForm})
+	};
+
 	render() {
 		const formElementArray = [];
 		for (let key in this.state.orderForm) {
@@ -90,7 +102,8 @@ export default class ContactData extends Component {
 						key={formElement.id}
 						elementType={formElement.config.elementType}
 						elementConfig={formElement.config.elementConfig}
-						value={formElement.config.value}/>
+						value={formElement.config.value}
+						changed={(event) => this.inputChangeHandler(event, formElement.id)}/>
 				))}
 				<Button btnType='Success' clicked={this.orderHandler}>ORDER</Button>
 			</form>
