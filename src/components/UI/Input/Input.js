@@ -5,7 +5,7 @@ import classes from './Input.css';
 const input = (props) => {
 	let inputElement = null;
 
-	switch (props.elementType.elementConfig) {
+	switch (props.elementType) {
 		case ('input'):
 			inputElement = <input
 				className={classes.InputElement}
@@ -19,7 +19,7 @@ const input = (props) => {
 				value={props.value}/>;
 			break;
 		default:
-			inputElement = <inputl
+			inputElement = <input
 				className={classes.InputElement}
 				{...props.elementConfig}
 				value={props.value}/>;
