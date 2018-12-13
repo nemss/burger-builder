@@ -84,9 +84,11 @@ export default class ContactData extends Component {
 						{value: 'cheapest', displayValue: 'Cheapest'}
 					]
 				},
-				value: ''
+				value: '',
+				valid: true
 			}
 		},
+		formIsValid: false,
 		loading: false
 	};
 
@@ -109,15 +111,16 @@ export default class ContactData extends Component {
 
 	checkValidity(value, rules) {
 		let isValid = true;
-		if(rules.required) {
+
+		if (rules.required) {
 			isValid = value.trim() !== '' && isValid;
 		}
 
-		if(rules.minlength) {
+		if (rules.minlength) {
 			isValid = value.length >= rules.minlength && isValid;
 		}
 
-		if(rules.maxlength) {
+		if (rules.maxlength) {
 			isValid = value.length <= rules.maxlength && isValid;
 		}
 
@@ -135,7 +138,13 @@ export default class ContactData extends Component {
 		updateFormElement.valid = this.checkValidity(updateFormElement.value, updateFormElement.validation);
 		updateFormElement.touched = true;
 		updatedOrderForm[inputIdentifier] = updateFormElement;
-		this.setState({orderForm: updatedOrderForm})
+
+		let formIsValid = true;
+		for (let inputIdentifier in updatedOrderForm) {
+			formIsValid = updatedOrderForm[inputIdentifier].valid && formIsValid;
+		}
+		console.log(formIsValid);
+		this.setState({orderForm: updatedOrderForm, formIsValid: formIsValid})
 	};
 
 	render() {
@@ -159,7 +168,7 @@ export default class ContactData extends Component {
 						touched={formElement.config.touched}
 						changed={(event) => this.inputChangeHandler(event, formElement.id)}/>
 				))}
-				<Button btnType='Success'>ORDER</Button>
+				<Button btnType='Success' disabled={!this.state.formIsValid}>ORDER</Button>
 			</form>
 		);
 		if (this.state.loading) {
