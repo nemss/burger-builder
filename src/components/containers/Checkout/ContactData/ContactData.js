@@ -19,7 +19,8 @@ export default class ContactData extends Component {
 				validation: {
 					required: true
 				},
-				valid: false
+				valid: false,
+				touched: false
 			},
 			street: {
 				elementType: 'input',
@@ -31,7 +32,8 @@ export default class ContactData extends Component {
 				validation: {
 					required: true
 				},
-				valid: false
+				valid: false,
+				touched: false
 			},
 			zipCode: {
 				elementType: 'input',
@@ -45,7 +47,8 @@ export default class ContactData extends Component {
 					minlength: 5,
 					maxlength: 5
 				},
-				valid: false
+				valid: false,
+				touched: false
 			},
 			country: {
 				elementType: 'input',
@@ -57,7 +60,8 @@ export default class ContactData extends Component {
 				validation: {
 					required: true
 				},
-				valid: false
+				valid: false,
+				touched: false
 			},
 			email: {
 				elementType: 'input',
@@ -69,7 +73,8 @@ export default class ContactData extends Component {
 				validation: {
 					required: true
 				},
-				valid: false
+				valid: false,
+				touched: false
 			},
 			deliveryMethod: {
 				elementType: 'select',
@@ -128,6 +133,7 @@ export default class ContactData extends Component {
 		};
 		updateFormElement.value = event.target.value;
 		updateFormElement.valid = this.checkValidity(updateFormElement.value, updateFormElement.validation);
+		updateFormElement.touched = true;
 		updatedOrderForm[inputIdentifier] = updateFormElement;
 		this.setState({orderForm: updatedOrderForm})
 	};
@@ -150,6 +156,7 @@ export default class ContactData extends Component {
 						value={formElement.config.value}
 						invalid={!formElement.config.valid}
 						shouldValidate={formElement.config.validation}
+						touched={formElement.config.touched}
 						changed={(event) => this.inputChangeHandler(event, formElement.id)}/>
 				))}
 				<Button btnType='Success'>ORDER</Button>
