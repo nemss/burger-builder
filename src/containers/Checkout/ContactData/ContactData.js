@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 
-import Button from '../../../../components/UI/Button/Button';
-import Spinner from '../../../UI/Spinner/Spinner.css';
+import Button from '../../../components/UI/Button/Button';
+import Spinner from '../../../components/UI/Spinner/Spinner.css';
 import classes from './ContactData.css';
-import axios from '../../../../axios-orders';
-import Input from '../../../UI/Input/Input';
+import axios from '../../../axios-orders';
+import Input from '../../../components/UI/Input/Input';
 
 export default class ContactData extends Component {
 	state = {

@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import {Route, Switch} from "react-router-dom";
 
-import Layout from './components/containers/Layout/Layout';
-import BurgerBuilder from './components/containers/BurgerBuilder/BurgerBuilder';
-import Checkout from './components/containers/Checkout/Checkout';
-import Orders from './components/containers/Orders/Orders';
+import Layout from './containers/Layout/Layout';
+import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder';
+import Checkout from './containers/Checkout/Checkout';
+import Orders from './containers/Orders/Orders';
 
 class App extends Component {
 	render() {
