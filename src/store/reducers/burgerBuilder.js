@@ -35,7 +35,7 @@ const burgerBuilder = (state = initialState, action) => {
 					...state.ingredients,
 					[action.ingredientName]: state.ingredients[action.ingredientName] - 1
 				},
-				totalPrice: this.state.totalPrice - INGREDIENT_PRICES[action.ingredientName]
+				totalPrice: state.totalPrice - INGREDIENT_PRICES[action.ingredientName]
 			};
 		default:
 			return state;
