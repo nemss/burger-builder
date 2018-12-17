@@ -148,7 +148,6 @@ class ContactData extends Component {
 		for (let inputIdentifier in updatedOrderForm) {
 			formIsValid = updatedOrderForm[inputIdentifier].valid && formIsValid;
 		}
-		console.log(formIsValid);
 		this.setState({orderForm: updatedOrderForm, formIsValid: formIsValid})
 	};
 
@@ -191,7 +190,7 @@ class ContactData extends Component {
 const mapStateToProps = state => {
 	return {
 		ings: state.ingredients,
-		price: state.ingredients
+		price: state.totalPrice
 	}
 };
 
