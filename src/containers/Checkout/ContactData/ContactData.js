@@ -7,7 +7,7 @@ import classes from './ContactData.css';
 import axios from '../../../axios-orders';
 import Input from '../../../components/UI/Input/Input';
 import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler';
-import * as actons from '../../../store/actions/index';
+import * as actions from '../../../store/actions/index';
 
 class ContactData extends Component {
 	state = {
@@ -197,8 +197,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		onOrderBurger: (orderData) => dispatch(actons.purchaseBurger(orderData))
-	}
+		onOrderBurger: (orderData) => dispatch(actions.purchaseBurger(orderData))
+	};
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(ContactData, axios));
