@@ -19,7 +19,6 @@ class BurgerBuilder extends Component {
 		this.props.onInitIngredients();
 	}
 
-
 	updatePurchaseState(ingredients) {
 		const sum = Object.keys(ingredients)
 			.map(igKey => ingredients[igKey])
