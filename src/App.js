@@ -1,14 +1,15 @@
-import React, {Component} from 'react';
+import React, {Component, lazy} from 'react';
 import {Route, Switch, withRouter, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 
 import Layout from './containers/Layout/Layout';
 import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder';
-import Checkout from './containers/Checkout/Checkout';
-import Orders from './containers/Orders/Orders';
-import Auth from './containers/Auth/Auth';
 import Logout from './containers/Auth/Logout/Logout'
 import * as actions from './store/actions/index';
+
+const Checkout = lazy(() => import('./containers/Checkout/Checkout'));
+const Orders = lazy(() => import('./containers/Orders/Orders'));
+const Auth = lazy(() => import('./containers/Auth/Auth'));
 
 class App extends Component {
 	componentDidMount() {
@@ -19,13 +20,13 @@ class App extends Component {
 	render() {
 		let routes = (
 			<Switch>
-				<Route path="/auth" component={Auth} />
-				<Route path="/" exact component={BurgerBuilder} />
-				<Redirect to="/" />
+				<Route path="/auth" component={Auth}/>
+				<Route path="/" exact component={BurgerBuilder}/>
+				<Redirect to="/"/>
 			</Switch>
 		);
 
-		if ( this.props.isAuthenticated ) {
+		if (this.props.isAuthenticated) {
 			routes = (
 				<Switch>
 					<Route path="/checkout" component={Checkout}/>
@@ -56,7 +57,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		onTryAutoSignup: () => dispatch( actions.authCheckState() )
+		onTryAutoSignup: () => dispatch(actions.authCheckState())
 	};
 };
 
