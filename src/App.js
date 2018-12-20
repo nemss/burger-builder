@@ -1,4 +1,4 @@
-import React, {Component, lazy} from 'react';
+import React, {Component, lazy, Suspense} from 'react';
 import {Route, Switch, withRouter, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 
@@ -6,6 +6,7 @@ import Layout from './containers/Layout/Layout';
 import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder';
 import Logout from './containers/Auth/Logout/Logout'
 import * as actions from './store/actions/index';
+import {waitingComponent} from "./shared/utility";
 
 const Checkout = lazy(() => import('./containers/Checkout/Checkout'));
 const Orders = lazy(() => import('./containers/Orders/Orders'));
@@ -20,7 +21,7 @@ class App extends Component {
 	render() {
 		let routes = (
 			<Switch>
-				<Route path="/auth" component={Auth}/>
+				<Route path="/auth" component={waitingComponent(Auth)}/>
 				<Route path="/" exact component={BurgerBuilder}/>
 				<Redirect to="/"/>
 			</Switch>
@@ -29,10 +30,11 @@ class App extends Component {
 		if (this.props.isAuthenticated) {
 			routes = (
 				<Switch>
-					<Route path="/checkout" component={Checkout}/>
-					<Route path="/orders" component={Orders}/>
+					<Route path="/checkout" component={waitingComponent(Checkout)}/>
+
+					<Route path="/orders" component={waitingComponent(Orders)}/>
 					<Route path="/logout" component={Logout}/>
-					<Route path="/auth" component={Auth}/>
+					<Route path="/auth" component={waitingComponent(Auth)}/>
 					<Route path="/" exact component={BurgerBuilder}/>
 					<Redirect to="/"/>
 				</Switch>

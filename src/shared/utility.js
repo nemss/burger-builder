@@ -1,3 +1,5 @@
+import React, {Suspense} from 'react'
+
 export const updateObject = (oldObject, updatedProperties) => {
 	return {
 		...oldObject,
@@ -34,4 +36,12 @@ export const checkValidity = (value, rules) => {
 	}
 
 	return isValid;
-}
+};
+
+ export const waitingComponent = (Component) => {
+	return props => (
+		<Suspense fallback={<div>Loading...</div>}>
+			<Component {...props} />
+		</Suspense>
+	);
+};
